@@ -4,10 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
@@ -31,7 +28,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    MyBox()
+                    MyColumn()
                 }
             }
         }
@@ -62,10 +59,24 @@ fun MyBox() {
     }
 }
 
+@Composable
+fun MyColumn() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.SpaceBetween
+    ) {
+        Text(text = "Ejemplo Uno", modifier = Modifier.background(Color.Red))
+        Text(text = "Ejemplo Dos", modifier = Modifier.background(Color.Black))
+        Text(text = "Ejemplo Tres", modifier = Modifier.background(Color.Cyan))
+        Text(text = "Ejemplo Cuatro", modifier = Modifier.background(Color.Blue))
+    }
+}
+
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     ComposeCatalogTheme {
-        MyBox()
+        MyColumn()
     }
 }
