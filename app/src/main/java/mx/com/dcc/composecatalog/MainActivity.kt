@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -28,7 +29,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    MyColumn()
+                    MyRow()
                 }
             }
         }
@@ -66,10 +67,48 @@ fun MyColumn() {
             .fillMaxSize()
             .verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.SpaceBetween
     ) {
-        Text(text = "Ejemplo Uno", modifier = Modifier.background(Color.Red))
-        Text(text = "Ejemplo Dos", modifier = Modifier.background(Color.Black))
-        Text(text = "Ejemplo Tres", modifier = Modifier.background(Color.Cyan))
-        Text(text = "Ejemplo Cuatro", modifier = Modifier.background(Color.Blue))
+        Text(
+            text = "Ejemplo Uno",
+            modifier = Modifier
+                .background(Color.Red)
+                .fillMaxWidth()
+                .height(80.dp)
+        )
+        Text(
+            text = "Ejemplo Dos",
+            modifier = Modifier
+                .background(Color.Black)
+                .fillMaxWidth()
+                .height(80.dp)
+        )
+        Text(
+            text = "Ejemplo Tres",
+            modifier = Modifier
+                .background(Color.Cyan)
+                .fillMaxWidth()
+                .height(80.dp)
+        )
+        Text(
+            text = "Ejemplo Cuatro",
+            modifier = Modifier
+                .background(Color.Blue)
+                .fillMaxWidth()
+                .height(80.dp)
+        )
+    }
+}
+
+@Composable
+fun MyRow() {
+    Row(
+        modifier = Modifier
+            .fillMaxSize()
+            .horizontalScroll(rememberScrollState()),
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        Text(text = "Ejemplo 1")
+        Text(text = "Ejemplo 2")
+        Text(text = "Ejemplo 3")
     }
 }
 
@@ -77,6 +116,6 @@ fun MyColumn() {
 @Composable
 fun DefaultPreview() {
     ComposeCatalogTheme {
-        MyColumn()
+        MyRow()
     }
 }
