@@ -29,9 +29,52 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    MyRow()
+                    MyComplexLayout()
                 }
             }
+        }
+    }
+}
+
+@Composable
+fun MyComplexLayout() {
+    Column(modifier = Modifier.fillMaxSize()) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1f)
+                .background(Color.Cyan)
+        ) {
+
+        }
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1f)
+        ) {
+            Box(
+                modifier = Modifier
+                    .weight(1f)
+                    .fillMaxHeight()
+                    .background(Color.Red)
+            )
+            Box(
+                modifier = Modifier
+                    .weight(1f)
+                    .fillMaxHeight()
+                    .background(Color.Green),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(text = "Hello world")
+            }
+        }
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1f)
+                .background(Color.Magenta)
+        ) {
+
         }
     }
 }
@@ -116,6 +159,6 @@ fun MyRow() {
 @Composable
 fun DefaultPreview() {
     ComposeCatalogTheme {
-        MyRow()
+        MyComplexLayout()
     }
 }
