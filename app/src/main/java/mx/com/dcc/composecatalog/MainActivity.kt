@@ -8,14 +8,8 @@ import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Button
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
+import androidx.compose.material.*
+import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -39,11 +33,59 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    MyText()
+                    Column {
+                        MyTextFieldOutlined()
+                    }
                 }
             }
         }
     }
+}
+
+@Composable
+fun MyTextFieldOutlined() {
+    var myText by remember {
+        mutableStateOf("")
+    }
+    OutlinedTextField(
+        value = myText, onValueChange = {
+            myText = it
+        },
+        modifier = Modifier.padding(all = 24.dp),
+        label = { Text(text = "Hello")},
+        colors = TextFieldDefaults.outlinedTextFieldColors(
+            focusedBorderColor = Color.Magenta,
+            unfocusedBorderColor = Color.Blue
+        )
+    )
+}
+
+@Composable
+fun MyTextFieldAdvance() {
+    var myText by remember {
+        mutableStateOf("")
+    }
+    TextField(
+        value = myText,
+        onValueChange = {
+            myText = if (it.contains("a")) {
+                it.replace("a", "")
+            } else {
+                it
+            }
+        },
+        label = { Text(text = "Introduce tu nombre") }
+    )
+}
+
+@Composable
+fun MyTextField() {
+    var myText by remember {
+        mutableStateOf("")
+    }
+    TextField(value = myText, onValueChange = {
+        myText = it
+    })
 }
 
 @Composable
@@ -217,6 +259,6 @@ fun MyRow() {
 @Composable
 fun DefaultPreview() {
     ComposeCatalogTheme {
-        MyText()
+        MyTextFieldOutlined()
     }
 }
