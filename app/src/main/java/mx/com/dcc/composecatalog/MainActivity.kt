@@ -34,12 +34,20 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colors.background
                 ) {
                     Column {
-                        MyTextFieldOutlined()
+                        var myText by remember {
+                            mutableStateOf("")
+                        }
+                        MyTextFieldStataHoisting(myText) { myText = it }
                     }
                 }
             }
         }
     }
+}
+
+@Composable
+fun MyTextFieldStataHoisting(name: String, onValueChange: (String) -> Unit) {
+    TextField(value = name, onValueChange = { onValueChange(it) })
 }
 
 @Composable
@@ -52,7 +60,7 @@ fun MyTextFieldOutlined() {
             myText = it
         },
         modifier = Modifier.padding(all = 24.dp),
-        label = { Text(text = "Hello")},
+        label = { Text(text = "Hello") },
         colors = TextFieldDefaults.outlinedTextFieldColors(
             focusedBorderColor = Color.Magenta,
             unfocusedBorderColor = Color.Blue
