@@ -5,12 +5,16 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -30,17 +34,36 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    Column {
+                    Column(modifier = Modifier.fillMaxSize()) {
                         /*var myText by remember {
                             mutableStateOf("")
                         }
                         MyTextFieldStataHoisting(myText) { myText = it }*/
-                        MyButtonExample()
+                        MyImageAdvance()
                     }
                 }
             }
         }
     }
+}
+
+@Composable
+fun MyImageAdvance() {
+    Image(
+        painter = painterResource(id = R.drawable.ic_launcher_background),
+        contentDescription = "Example",
+        modifier = Modifier
+            .clip(CircleShape)
+            .border(2.dp, Color.Black, CircleShape)
+    )
+}
+
+@Composable
+fun MyImage() {
+    Image(
+        painter = painterResource(id = R.drawable.ic_launcher_background),
+        contentDescription = "Example"
+    )
 }
 
 @Composable
@@ -298,6 +321,8 @@ fun MyRow() {
 @Composable
 fun DefaultPreview() {
     ComposeCatalogTheme {
-        MyButtonExample()
+        Column(modifier = Modifier.fillMaxSize()) {
+            MyImageAdvance()
+        }
     }
 }
