@@ -45,18 +45,22 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MyButtonExample() {
+    var isEnable by rememberSaveable {
+        mutableStateOf(true)
+    }
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(24.dp)
     ) {
         Button(
-            onClick = { },
+            onClick = { isEnable = false },
             colors = ButtonDefaults.buttonColors(
                 backgroundColor = Color.Magenta,
                 contentColor = Color.Blue
             ),
-            border = BorderStroke(5.dp, color = Color.Green)
+            border = BorderStroke(5.dp, color = Color.Green),
+            enabled = isEnable
         ) {
             Text(text = "Hello world!")
         }
