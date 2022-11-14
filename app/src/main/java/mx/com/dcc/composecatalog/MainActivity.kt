@@ -37,14 +37,59 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colors.background
                 ) {
                     Column(modifier = Modifier.fillMaxSize()) {
+                        // MyTextFieldStataHoisting
                         /*var myText by remember {
                             mutableStateOf("")
                         }
                         MyTextFieldStataHoisting(myText) { myText = it }*/
-                        MyIcon()
+                        MyProgressBarAdvance()
                     }
                 }
             }
+        }
+    }
+}
+
+@Composable
+fun MyProgressBarAdvance() {
+    var progressStatus by rememberSaveable {
+        mutableStateOf(0f)
+    }
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        CircularProgressIndicator(progress = progressStatus)
+        Row(modifier = Modifier.fillMaxSize()) {
+            Button(onClick = { progressStatus += 0.1f}) {
+                Text(text = "Incrementar")
+            }
+            Button(onClick = { progressStatus -= 0.1f }) {
+                Text(text = "Reducir")
+            }
+        }
+    }
+}
+
+@Composable
+fun MyProgressBar() {
+    var showLoading by rememberSaveable {
+        mutableStateOf(false)
+    }
+    Column(
+        modifier = Modifier
+            .padding(24.dp)
+            .fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        if (showLoading) {
+            CircularProgressIndicator()
+            LinearProgressIndicator(modifier = Modifier.padding(top = 32.dp))
+        }
+        Button(onClick = { showLoading = !showLoading }, modifier = Modifier.padding(top = 16.dp)) {
+            Text(text = "Load!")
         }
     }
 }
@@ -329,7 +374,7 @@ fun MyRow() {
 fun DefaultPreview() {
     ComposeCatalogTheme {
         Column(modifier = Modifier.fillMaxSize()) {
-            MyIcon()
+            MyProgressBarAdvance()
         }
     }
 }
