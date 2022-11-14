@@ -8,6 +8,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Star
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
@@ -39,12 +41,17 @@ class MainActivity : ComponentActivity() {
                             mutableStateOf("")
                         }
                         MyTextFieldStataHoisting(myText) { myText = it }*/
-                        MyImageAdvance()
+                        MyIcon()
                     }
                 }
             }
         }
     }
+}
+
+@Composable
+fun MyIcon() {
+    Icon(imageVector = Icons.Rounded.Star, contentDescription = "Icon", tint = Color.Yellow)
 }
 
 @Composable
@@ -322,7 +329,7 @@ fun MyRow() {
 fun DefaultPreview() {
     ComposeCatalogTheme {
         Column(modifier = Modifier.fillMaxSize()) {
-            MyImageAdvance()
+            MyIcon()
         }
     }
 }
