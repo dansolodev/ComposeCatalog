@@ -64,6 +64,15 @@ fun MyButtonExample() {
         ) {
             Text(text = "Hello world!")
         }
+
+        OutlinedButton(onClick = { }, modifier = Modifier.padding(top = 8.dp)) {
+            Text(text = "Hello World!")
+        }
+
+        TextButton(onClick = { }, modifier = Modifier.padding(top = 8.dp)) {
+            Text(text = "Hello World!")
+        }
+
     }
 }
 
