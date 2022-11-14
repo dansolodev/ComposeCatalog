@@ -3,11 +3,8 @@ package mx.com.dcc.composecatalog
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.background
-import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -34,13 +31,34 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colors.background
                 ) {
                     Column {
-                        var myText by remember {
+                        /*var myText by remember {
                             mutableStateOf("")
                         }
-                        MyTextFieldStataHoisting(myText) { myText = it }
+                        MyTextFieldStataHoisting(myText) { myText = it }*/
+                        MyButtonExample()
                     }
                 }
             }
+        }
+    }
+}
+
+@Composable
+fun MyButtonExample() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(24.dp)
+    ) {
+        Button(
+            onClick = { },
+            colors = ButtonDefaults.buttonColors(
+                backgroundColor = Color.Magenta,
+                contentColor = Color.Blue
+            ),
+            border = BorderStroke(5.dp, color = Color.Green)
+        ) {
+            Text(text = "Hello world!")
         }
     }
 }
@@ -267,6 +285,6 @@ fun MyRow() {
 @Composable
 fun DefaultPreview() {
     ComposeCatalogTheme {
-        MyTextFieldOutlined()
+        MyButtonExample()
     }
 }
