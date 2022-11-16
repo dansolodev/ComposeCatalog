@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.state.ToggleableState
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -42,10 +43,11 @@ class MainActivity : ComponentActivity() {
                             mutableStateOf("")
                         }
                         MyTextFieldStataHoisting(myText) { myText = it }*/
-                        val options = getOptions(titles = listOf("Unos", "Dos", "Tres", "Cuatro"))
+                        /*val options = getOptions(titles = listOf("Unos", "Dos", "Tres", "Cuatro"))
                         options.forEach {
                             MyCheckBoxWithTextCompleted(it)
-                        }
+                        }*/
+                        MyTriStateCheckBox()
                     }
                 }
             }
@@ -57,13 +59,22 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun DefaultPreview() {
     ComposeCatalogTheme {
-        val options = getOptions(titles = listOf("Unos", "Dos", "Tres", "Cuatro"))
-        Column(modifier = Modifier.fillMaxSize()) {
-            options.forEach {
-                MyCheckBoxWithTextCompleted(it)
-            }
-        }
+        MyTriStateCheckBox()
     }
+}
+
+@Composable
+fun MyTriStateCheckBox() {
+    var status by rememberSaveable {
+        mutableStateOf(ToggleableState.Off)
+    }
+    TriStateCheckbox(state = status, onClick = {
+        status = when(status) {
+            ToggleableState.On -> ToggleableState.Off
+            ToggleableState.Off -> ToggleableState.Indeterminate
+            ToggleableState.Indeterminate -> ToggleableState.On
+        }
+    })
 }
 
 @Composable
