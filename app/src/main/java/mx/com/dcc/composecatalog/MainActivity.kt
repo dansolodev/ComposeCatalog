@@ -42,12 +42,81 @@ class MainActivity : ComponentActivity() {
                             mutableStateOf("")
                         }
                         MyTextFieldStataHoisting(myText) { myText = it }*/
-                        MySwitch()
+                        val options = getOptions(titles = listOf("Unos", "Dos", "Tres", "Cuatro"))
+                        options.forEach {
+                            MyCheckBoxWithTextCompleted(it)
+                        }
                     }
                 }
             }
         }
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun DefaultPreview() {
+    ComposeCatalogTheme {
+        val options = getOptions(titles = listOf("Unos", "Dos", "Tres", "Cuatro"))
+        Column(modifier = Modifier.fillMaxSize()) {
+            options.forEach {
+                MyCheckBoxWithTextCompleted(it)
+            }
+        }
+    }
+}
+
+@Composable
+fun getOptions(titles: List<String>): List<CheckInfo> {
+    return titles.map {
+        var status by rememberSaveable { mutableStateOf(false) }
+        CheckInfo(
+            title = it,
+            selected = status,
+            onCheckedChange = { newStatus -> status = newStatus }
+        )
+    }
+}
+
+@Composable
+fun MyCheckBoxWithTextCompleted(checkInfo: CheckInfo) {
+    Row(modifier = Modifier.padding(8.dp), verticalAlignment = Alignment.CenterVertically) {
+        Checkbox(
+            checked = checkInfo.selected,
+            onCheckedChange = { checkInfo.onCheckedChange(!checkInfo.selected) })
+        Spacer(modifier = Modifier.width(8.dp))
+        Text(text = checkInfo.title)
+    }
+}
+
+@Composable
+fun MyCheckBoxWithText() {
+    var state by rememberSaveable {
+        mutableStateOf(false)
+    }
+    Row(modifier = Modifier.padding(8.dp), verticalAlignment = Alignment.CenterVertically) {
+        Checkbox(checked = state, onCheckedChange = { state = !state })
+        Spacer(modifier = Modifier.width(8.dp))
+        Text(text = "Ejemplo 1")
+    }
+}
+
+@Composable
+fun MyCheckBox() {
+    // Para trabajar CheckBox siempre hay que usar estados
+    var state by rememberSaveable {
+        mutableStateOf(false)
+    }
+    Checkbox(
+        checked = state,
+        onCheckedChange = { state = !state },
+        enabled = true,
+        colors = CheckboxDefaults.colors(
+            checkedColor = Color.Red,
+            uncheckedColor = Color.Green,
+            checkmarkColor = Color.Blue
+        )
+    )
 }
 
 @Composable
@@ -384,15 +453,5 @@ fun MyRow() {
         Text(text = "Ejemplo 1")
         Text(text = "Ejemplo 2")
         Text(text = "Ejemplo 3")
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    ComposeCatalogTheme {
-        Column(modifier = Modifier.fillMaxSize()) {
-            MySwitch()
-        }
     }
 }
