@@ -42,12 +42,30 @@ class MainActivity : ComponentActivity() {
                             mutableStateOf("")
                         }
                         MyTextFieldStataHoisting(myText) { myText = it }*/
-                        MyProgressBarAdvance()
+                        MySwitch()
                     }
                 }
             }
         }
     }
+}
+
+@Composable
+fun MySwitch() {
+    // Para trabajar switch siempre hay que usar estados
+    var state by rememberSaveable {
+        mutableStateOf(false)
+    }
+    Switch(
+        checked = state,
+        onCheckedChange = { state = !state },
+        colors = SwitchDefaults.colors(
+            uncheckedThumbColor = Color.Red,
+            uncheckedTrackColor = Color.Magenta,
+            checkedThumbColor = Color.Green,
+            checkedTrackColor = Color.Cyan
+        )
+    )
 }
 
 @Composable
@@ -62,7 +80,7 @@ fun MyProgressBarAdvance() {
     ) {
         CircularProgressIndicator(progress = progressStatus)
         Row(modifier = Modifier.fillMaxSize()) {
-            Button(onClick = { progressStatus += 0.1f}) {
+            Button(onClick = { progressStatus += 0.1f }) {
                 Text(text = "Incrementar")
             }
             Button(onClick = { progressStatus -= 0.1f }) {
@@ -374,7 +392,7 @@ fun MyRow() {
 fun DefaultPreview() {
     ComposeCatalogTheme {
         Column(modifier = Modifier.fillMaxSize()) {
-            MyProgressBarAdvance()
+            MySwitch()
         }
     }
 }
