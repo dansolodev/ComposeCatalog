@@ -47,7 +47,7 @@ class MainActivity : ComponentActivity() {
                         options.forEach {
                             MyCheckBoxWithTextCompleted(it)
                         }*/
-                        MyTriStateCheckBox()
+                        MyRadioButton()
                     }
                 }
             }
@@ -59,7 +59,26 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun DefaultPreview() {
     ComposeCatalogTheme {
-        MyTriStateCheckBox()
+        MyRadioButton()
+    }
+}
+
+@Composable
+fun MyRadioButton() {
+    var state by rememberSaveable {
+        mutableStateOf(false)
+    }
+    Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+        RadioButton(
+            selected = state,
+            onClick = { },
+            colors = RadioButtonDefaults.colors(
+                selectedColor = Color.Red,
+                unselectedColor = Color.Yellow,
+                disabledColor = Color.Green
+            )
+        )
+        Text(text = "Ejemplo 1")
     }
 }
 
@@ -69,7 +88,7 @@ fun MyTriStateCheckBox() {
         mutableStateOf(ToggleableState.Off)
     }
     TriStateCheckbox(state = status, onClick = {
-        status = when(status) {
+        status = when (status) {
             ToggleableState.On -> ToggleableState.Off
             ToggleableState.Off -> ToggleableState.Indeterminate
             ToggleableState.Indeterminate -> ToggleableState.On
