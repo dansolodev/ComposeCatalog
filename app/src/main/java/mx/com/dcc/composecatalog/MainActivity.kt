@@ -54,7 +54,7 @@ class MainActivity : ComponentActivity() {
                         MyRadioButtonList(selected) {
                             selected = it
                         }*/
-                        MyDivider()
+                        MyDropDownMenu()
                     }
                 }
             }
@@ -66,7 +66,43 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun DefaultPreview() {
     ComposeCatalogTheme {
-        MyDivider()
+        MyDropDownMenu()
+    }
+}
+
+@Composable
+fun MyDropDownMenu() {
+    var selectedText by rememberSaveable {
+        mutableStateOf("")
+    }
+    var expanded by rememberSaveable {
+        mutableStateOf(false)
+    }
+    val desserts = listOf("Pastel", "Helado", "Café", "Fruta", "Chilaquiles")
+    Column(modifier = Modifier.padding(20.dp)) {
+        OutlinedTextField(
+            value = selectedText,
+            onValueChange = { selectedText = it },
+            enabled = false,
+            readOnly = true,
+            modifier = Modifier
+                .clickable { expanded = true }
+                .fillMaxWidth()
+        )
+        DropdownMenu(
+            expanded = expanded,
+            onDismissRequest = { expanded = false },
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            desserts.forEach { dessert ->
+                DropdownMenuItem(onClick = {
+                    expanded = false
+                    selectedText = dessert
+                }) {
+                    Text(text = dessert)
+                }
+            }
+        }
     }
 }
 
