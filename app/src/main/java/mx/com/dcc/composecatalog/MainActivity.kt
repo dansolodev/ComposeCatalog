@@ -47,12 +47,13 @@ class MainActivity : ComponentActivity() {
                         options.forEach {
                             MyCheckBoxWithTextCompleted(it)
                         }*/
-                        var selected by remember {
+                        /*var selected by remember {
                             mutableStateOf("Jacke")
                         }
                         MyRadioButtonList(selected) {
                             selected = it
-                        }
+                        }*/
+                        MyCard()
                     }
                 }
             }
@@ -64,10 +65,27 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun DefaultPreview() {
     ComposeCatalogTheme {
-        var selected by remember {
-            mutableStateOf("Jacke")
+        MyCard()
+    }
+}
+
+@Composable
+fun MyCard() {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp),
+        elevation = 12.dp,
+        shape = MaterialTheme.shapes.small,
+        backgroundColor = Color.Gray,
+        contentColor = Color.DarkGray,
+        border = BorderStroke(5.dp, Color.Black)
+    ) {
+
+        Column(modifier = Modifier.padding(16.dp)) {
+            Text(text = "Ejemplo de CARD")
         }
-        MyRadioButtonList(selected) {selected = it}
+
     }
 }
 
@@ -76,7 +94,7 @@ fun MyRadioButtonList(name: String, onItemSelected: (String) -> Unit) {
 
     Column(modifier = Modifier.fillMaxWidth()) {
         Row {
-           RadioButton(selected = name == "Jacke", onClick = { onItemSelected("Jacke") })
+            RadioButton(selected = name == "Jacke", onClick = { onItemSelected("Jacke") })
             Text(text = "Jacke")
         }
         Row {
