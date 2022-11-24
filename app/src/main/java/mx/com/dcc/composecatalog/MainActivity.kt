@@ -9,6 +9,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.rounded.Star
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -53,7 +54,7 @@ class MainActivity : ComponentActivity() {
                         MyRadioButtonList(selected) {
                             selected = it
                         }*/
-                        MyCard()
+                        MyBadgeBox()
                     }
                 }
             }
@@ -65,7 +66,14 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun DefaultPreview() {
     ComposeCatalogTheme {
-        MyCard()
+        MyBadgeBox()
+    }
+}
+
+@Composable
+fun MyBadgeBox() {
+    BadgedBox(badge = { Badge { Text(text = "8") } }, modifier = Modifier.padding(16.dp)) {
+        Icon(imageVector = Icons.Default.Star, contentDescription = "")
     }
 }
 
