@@ -54,7 +54,7 @@ class MainActivity : ComponentActivity() {
                         MyRadioButtonList(selected) {
                             selected = it
                         }*/
-                        MyBadgeBox()
+                        MyDivider()
                     }
                 }
             }
@@ -66,8 +66,13 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun DefaultPreview() {
     ComposeCatalogTheme {
-        MyBadgeBox()
+        MyDivider()
     }
+}
+
+@Composable
+fun MyDivider() {
+    Divider(modifier = Modifier.fillMaxWidth(), color = Color.DarkGray)
 }
 
 @Composable
