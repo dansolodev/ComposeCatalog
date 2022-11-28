@@ -62,11 +62,12 @@ class MainActivity : ComponentActivity() {
                         Button(onClick = { show = true }) {
                             Text(text = "Mostrar dialogo")
                         }
-                        MyDialog(
+                        /*MyAlertDialog(
                             show = show,
                             onDismiss = { show = false},
                             onConfirm = { }
-                        )
+                        )*/
+                        MySimpleCustomDialog(show = show, onDismiss = { show = false })
                     }
                 }
             }
