@@ -37,7 +37,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    Column(modifier = Modifier.fillMaxSize()) {
+                    /*Column(modifier = Modifier.fillMaxSize()) {
                         // MyTextFieldStataHoisting
                         /*var myText by remember {
                             mutableStateOf("")
@@ -53,7 +53,20 @@ class MainActivity : ComponentActivity() {
                         MyRadioButtonList(selected) {
                             selected = it
                         }*/
-                        MyRangeSlider()
+
+                    }*/
+                    var show by remember {
+                        mutableStateOf(false)
+                    }
+                    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                        Button(onClick = { show = true }) {
+                            Text(text = "Mostrar dialogo")
+                        }
+                        MyDialog(
+                            show = show,
+                            onDismiss = { show = false},
+                            onConfirm = { }
+                        )
                     }
                 }
             }
@@ -65,7 +78,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun DefaultPreview() {
     ComposeCatalogTheme {
-        BasicSlider()
+        //MyDialog(true)
     }
 }
 
