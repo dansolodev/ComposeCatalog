@@ -6,9 +6,10 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.AlertDialog
+import androidx.compose.material.Divider
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -28,8 +29,40 @@ import mx.com.dcc.composecatalog.ui.theme.ComposeCatalogTheme
 fun DialogsPreview() {
     ComposeCatalogTheme() {
         Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-            MyCustomDialog(show = true) {
+            MyConfirmationDialog(show = true) {
 
+            }
+        }
+    }
+}
+
+@Composable
+fun MyConfirmationDialog(
+    show: Boolean,
+    onDismiss: () -> Unit
+) {
+    if (show) {
+        Dialog(onDismissRequest = { onDismiss() }) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(Color.White)
+            ) {
+                MyTitleDialog(text = "Phone ringtone", modifier = Modifier.padding(24.dp))
+                Divider(modifier = Modifier.fillMaxWidth(), color = Color.Gray)
+                var status by remember {
+                    mutableStateOf("")
+                }
+                MyRadioButtonList(name = status, onItemSelected = { status = it })
+                Divider(modifier = Modifier.fillMaxWidth(), color = Color.Gray)
+                Row(modifier = Modifier.align(Alignment.End).padding(8.dp)) {
+                    TextButton(onClick = { /*TODO*/ }) {
+                        Text(text = "Cancel")
+                    }
+                    TextButton(onClick = { /*TODO*/ }) {
+                        Text(text = "Ok")
+                    }
+                }
             }
         }
     }
@@ -106,12 +139,12 @@ fun MyAlertDialog(
 }
 
 @Composable
-fun MyTitleDialog(text: String) {
+fun MyTitleDialog(text: String, modifier: Modifier = Modifier.padding(bottom = 12.dp)) {
     Text(
         text = text,
         fontWeight = FontWeight.SemiBold,
         fontSize = 20.sp,
-        modifier = Modifier.padding(bottom = 12.dp)
+        modifier = modifier
     )
 }
 

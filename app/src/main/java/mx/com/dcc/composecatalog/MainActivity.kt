@@ -158,19 +158,19 @@ fun MyCard() {
 fun MyRadioButtonList(name: String, onItemSelected: (String) -> Unit) {
 
     Column(modifier = Modifier.fillMaxWidth()) {
-        Row {
+        Row(verticalAlignment = Alignment.CenterVertically) {
             RadioButton(selected = name == "Jacke", onClick = { onItemSelected("Jacke") })
             Text(text = "Jacke")
         }
-        Row {
+        Row(verticalAlignment = Alignment.CenterVertically) {
             RadioButton(selected = name == "Rupi", onClick = { onItemSelected("Rupi") })
             Text(text = "Rupi")
         }
-        Row {
+        Row(verticalAlignment = Alignment.CenterVertically) {
             RadioButton(selected = name == "Coco", onClick = { onItemSelected("Coco") })
             Text(text = "Coco")
         }
-        Row {
+        Row(verticalAlignment = Alignment.CenterVertically) {
             RadioButton(selected = name == "Sam", onClick = { onItemSelected("Sam") })
             Text(text = "Sam")
         }
