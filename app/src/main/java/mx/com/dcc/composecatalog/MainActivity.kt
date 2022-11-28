@@ -67,7 +67,10 @@ class MainActivity : ComponentActivity() {
                             onDismiss = { show = false},
                             onConfirm = { }
                         )*/
-                        MySimpleCustomDialog(show = show, onDismiss = { show = false })
+                        //MySimpleCustomDialog(show = show, onDismiss = { show = false })
+                        MyCustomDialog(show = show) {
+                            show = false
+                        }
                     }
                 }
             }
