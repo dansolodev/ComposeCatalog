@@ -1,10 +1,7 @@
 package mx.com.dcc.composecatalog
 
 import android.widget.Toast
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.*
 import androidx.compose.material.Button
@@ -25,6 +22,36 @@ import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.launch
 import mx.com.dcc.composecatalog.models.Superhero
 import mx.com.dcc.composecatalog.ui.theme.ComposeCatalogTheme
+
+@OptIn(ExperimentalFoundationApi::class)
+@Composable
+fun SuperHeroStickyView() {
+    val context = LocalContext.current
+    val superhero = getSuperheroes().groupBy { it.publisher }
+
+    LazyColumn(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+
+        superhero.forEach { (publisher, mySuperhero) ->
+            stickyHeader {
+                Text(
+                    text = publisher,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(Color.Gray),
+                    fontSize = 16.sp,
+                    color = Color.Black
+                )
+            }
+            items(mySuperhero) { superhero ->
+                ItemHero(superhero = superhero) {
+                    Toast.makeText(context, it.superheroName, Toast.LENGTH_SHORT).show()
+                }
+            }
+
+        }
+
+    }
+}
 
 @Composable
 fun SuperHeroWithSpecialControlsView() {

@@ -72,7 +72,7 @@ class MainActivity : ComponentActivity() {
                             show = false
                         }
                     }*/
-                    SuperHeroWithSpecialControlsView()
+                    SuperHeroStickyView()
                 }
             }
         }
