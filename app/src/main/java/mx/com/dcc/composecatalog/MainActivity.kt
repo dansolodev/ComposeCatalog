@@ -55,23 +55,24 @@ class MainActivity : ComponentActivity() {
                         }*/
 
                     }*/
-                    var show by remember {
+                    /*var show by remember {
                         mutableStateOf(false)
                     }
                     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                         Button(onClick = { show = true }) {
                             Text(text = "Mostrar dialogo")
                         }
-                        /*MyAlertDialog(
+                        *//*MyAlertDialog(
                             show = show,
                             onDismiss = { show = false},
                             onConfirm = { }
-                        )*/
+                        )*//*
                         //MySimpleCustomDialog(show = show, onDismiss = { show = false })
                         MyCustomDialog(show = show) {
                             show = false
                         }
-                    }
+                    }*/
+                    SimpleRecyclerView()
                 }
             }
         }
