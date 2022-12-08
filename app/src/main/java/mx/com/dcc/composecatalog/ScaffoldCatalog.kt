@@ -1,6 +1,10 @@
 package mx.com.dcc.composecatalog
 
 
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
@@ -10,6 +14,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
@@ -21,32 +26,47 @@ fun ScaffoldSample() {
 
     Scaffold(
         topBar = {
-            MyTopAppBar {
-                coroutineScope.launch {
-                    scaffoldState.snackbarHostState.showSnackbar("Has pulsado $it")
+            MyTopAppBar(
+                onClickIcon = {
+                    coroutineScope.launch {
+                        scaffoldState.snackbarHostState.showSnackbar("Has pulsado $it")
+                    }
+                },
+                onClickDrawer = {
+                    coroutineScope.launch {
+                        scaffoldState.drawerState.open()
+                    }
                 }
-            }
+            )
         },
         scaffoldState = scaffoldState,
         bottomBar = { MyBottomNavigation() },
         floatingActionButton = { MyFAB() },
         floatingActionButtonPosition = FabPosition.Center,
-        isFloatingActionButtonDocked = true
+        isFloatingActionButtonDocked = false,
+        drawerContent = {
+            MyDrawer {
+                coroutineScope.launch {
+                    scaffoldState.drawerState.close()
+                }
+            }
+        },
+        drawerGesturesEnabled = true
     ) {
 
     }
 }
 
 @Composable
-fun MyTopAppBar(onClickIcon: (String) -> Unit) {
+fun MyTopAppBar(onClickIcon: (String) -> Unit, onClickDrawer: () -> Unit) {
     TopAppBar(
         title = { Text(text = "My first Toolbar") },
         backgroundColor = Color.Red,
         contentColor = Color.White,
         elevation = 8.dp,
         navigationIcon = {
-            IconButton(onClick = { onClickIcon("Back") }) {
-                Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = "Back button")
+            IconButton(onClick = { onClickDrawer() }) {
+                Icon(imageVector = Icons.Filled.Menu, contentDescription = "Back button")
             }
         },
         actions = {
@@ -106,5 +126,35 @@ fun MyFAB() {
         contentColor = Color.Black,
     ) {
         Icon(imageVector = Icons.Filled.Add, contentDescription = "Add button")
+    }
+}
+
+@Composable
+fun MyDrawer(onCloseDrawer: () -> Unit) {
+    Column(modifier = Modifier.padding(8.dp)) {
+        Text(
+            text = "First Option", modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 8.dp)
+                .clickable { onCloseDrawer() }
+        )
+        Text(
+            text = "Second Option", modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 8.dp)
+                .clickable { onCloseDrawer() }
+        )
+        Text(
+            text = "Third Option", modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 8.dp)
+                .clickable { onCloseDrawer() }
+        )
+        Text(
+            text = "Fourth Option", modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 8.dp)
+                .clickable { onCloseDrawer() }
+        )
     }
 }
