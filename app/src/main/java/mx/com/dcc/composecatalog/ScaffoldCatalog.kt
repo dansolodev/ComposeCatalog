@@ -19,13 +19,20 @@ fun ScaffoldSample() {
     val scaffoldState = rememberScaffoldState()
     val coroutineScope = rememberCoroutineScope()
 
-    Scaffold(topBar = {
-        MyTopAppBar {
-            coroutineScope.launch {
-                scaffoldState.snackbarHostState.showSnackbar("Has pulsado $it")
+    Scaffold(
+        topBar = {
+            MyTopAppBar {
+                coroutineScope.launch {
+                    scaffoldState.snackbarHostState.showSnackbar("Has pulsado $it")
+                }
             }
-        }
-    }, scaffoldState = scaffoldState, bottomBar = { MyBottomNavigation() }) {
+        },
+        scaffoldState = scaffoldState,
+        bottomBar = { MyBottomNavigation() },
+        floatingActionButton = { MyFAB() },
+        floatingActionButtonPosition = FabPosition.Center,
+        isFloatingActionButtonDocked = true
+    ) {
 
     }
 }
@@ -89,5 +96,15 @@ fun MyBottomNavigation() {
                 )
             }, label = { Text(text = "Person") }
         )
+    }
+}
+
+@Composable
+fun MyFAB() {
+    FloatingActionButton(
+        onClick = { }, backgroundColor = Color.Yellow,
+        contentColor = Color.Black,
+    ) {
+        Icon(imageVector = Icons.Filled.Add, contentDescription = "Add button")
     }
 }
