@@ -25,6 +25,9 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import mx.com.dcc.composecatalog.ui.theme.ComposeCatalogTheme
 
 class MainActivity : ComponentActivity() {
@@ -72,7 +75,12 @@ class MainActivity : ComponentActivity() {
                             show = false
                         }
                     }*/
-                    ScaffoldSample()
+                    val navigationController = rememberNavController()
+                    NavHost(navController = navigationController, startDestination = "screen1") {
+                        composable("screen1") { ScreenOne(navigationController) }
+                        composable("screen2") { ScreenTwo(navigationController) }
+                        composable("screen3") { ScreenThree(navigationController) }
+                    }
                 }
             }
         }
