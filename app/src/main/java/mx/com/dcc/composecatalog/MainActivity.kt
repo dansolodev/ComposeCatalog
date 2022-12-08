@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import mx.com.dcc.composecatalog.models.Routes
 import mx.com.dcc.composecatalog.ui.theme.ComposeCatalogTheme
 
 class MainActivity : ComponentActivity() {
@@ -76,10 +77,10 @@ class MainActivity : ComponentActivity() {
                         }
                     }*/
                     val navigationController = rememberNavController()
-                    NavHost(navController = navigationController, startDestination = "screen1") {
-                        composable("screen1") { ScreenOne(navigationController) }
-                        composable("screen2") { ScreenTwo(navigationController) }
-                        composable("screen3") { ScreenThree(navigationController) }
+                    NavHost(navController = navigationController, startDestination = Routes.ScreenOne.route) {
+                        composable(Routes.ScreenOne.route) { ScreenOne(navigationController) }
+                        composable(Routes.ScreenTwo.route) { ScreenTwo(navigationController) }
+                        composable(Routes.ScreenThree.route) { ScreenThree(navigationController) }
                     }
                 }
             }

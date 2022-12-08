@@ -10,6 +10,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavController
+import mx.com.dcc.composecatalog.models.Routes
 
 @Composable
 fun ScreenOne(navController: NavController) {
@@ -20,7 +21,7 @@ fun ScreenOne(navController: NavController) {
     ) {
         Text(text = "Screen One", modifier = Modifier
             .align(Alignment.Center)
-            .clickable { navController.navigate("screen2") }
+            .clickable { navController.navigate(Routes.ScreenTwo.route) }
         )
     }
 }
@@ -31,7 +32,7 @@ fun ScreenTwo(navController: NavController) {
         modifier = Modifier
             .fillMaxSize()
             .background(Color.Green)
-            .clickable { navController.navigate("screen3") }
+            .clickable { navController.navigate(Routes.ScreenThree.route) }
     ) {
         Text(text = "Screen Two", modifier = Modifier.align(Alignment.Center))
     }
