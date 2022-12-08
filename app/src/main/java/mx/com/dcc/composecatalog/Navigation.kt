@@ -44,19 +44,19 @@ fun ScreenThree(navController: NavController) {
         modifier = Modifier
             .fillMaxSize()
             .background(Color.Yellow)
-            .clickable { navController.navigate("${Routes.ScreenFour.route}/4") }
+            .clickable { navController.navigate(Routes.ScreenFour.createRoute(29)) }
     ) {
         Text(text = "Screen Three", modifier = Modifier.align(Alignment.Center))
     }
 }
 
 @Composable
-fun ScreenFour(navController: NavController, name: Int) {
+fun ScreenFour(navController: NavController, age: Int) {
     Box(
         modifier = Modifier
             .fillMaxSize()
             .background(Color.LightGray)
     ) {
-        Text(text = "$name", modifier = Modifier.align(Alignment.Center))
+        Text(text = "Tengo $age años", modifier = Modifier.align(Alignment.Center))
     }
 }
