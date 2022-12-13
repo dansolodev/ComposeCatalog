@@ -56,7 +56,19 @@ fun ScreenFour(navController: NavController, age: Int) {
         modifier = Modifier
             .fillMaxSize()
             .background(Color.LightGray)
+            .clickable { navController.navigate(Routes.ScreenFive.createRoute("Daniel")) }
     ) {
         Text(text = "Tengo $age años", modifier = Modifier.align(Alignment.Center))
+    }
+}
+
+@Composable
+fun ScreenFive(navController: NavController, name: String?) {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.Green)
+    ) {
+        Text(text = "Me llamo $name", modifier = Modifier.align(Alignment.Center))
     }
 }
