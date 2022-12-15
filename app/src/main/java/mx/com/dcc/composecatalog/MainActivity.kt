@@ -43,6 +43,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
+                    VisibilityAnimation()
                     /*Column(modifier = Modifier.fillMaxSize()) {
                         // MyTextFieldStataHoisting
                         /*var myText by remember {
@@ -78,7 +79,7 @@ class MainActivity : ComponentActivity() {
                             show = false
                         }
                     }*/
-                    val navigationController = rememberNavController()
+                    /*val navigationController = rememberNavController()
                     NavHost(
                         navController = navigationController,
                         startDestination = Routes.ScreenOne.route
@@ -108,7 +109,7 @@ class MainActivity : ComponentActivity() {
                             )
 
                         }
-                    }
+                    }*/
                 }
             }
         }
