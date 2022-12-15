@@ -43,7 +43,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    VisibilityAnimation()
+                    CrossFadeExampleAnimation()
                     /*Column(modifier = Modifier.fillMaxSize()) {
                         // MyTextFieldStataHoisting
                         /*var myText by remember {
